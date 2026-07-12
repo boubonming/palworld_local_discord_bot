@@ -1,0 +1,29 @@
+# ==========================================
+# 1. Private Configurations & Secret Tokens
+# ==========================================
+# Never commit your private Discord tokens or game passwords!
+.env
+*.env
+bot_history.log
+
+# ==========================================
+# 2. PyInstaller Compilation Artifacts
+# ==========================================
+# PyInstaller creates heavy temporary build directories when packaging into an EXE.
+build/
+dist/
+*.spec
+
+# ==========================================
+# 3. Python Local Environment & Caches
+# ==========================================
+# Keeps your repository free of optimized compiled Python bytecode files.
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# If you are using a local virtual environment (e.g., 'venv' folder), ignore it entirely.
+venv/
+.venv/
+env/
