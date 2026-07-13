@@ -41,10 +41,10 @@ class ServerControl(commands.Cog):
                 )
                 self.empty_minutes_counter += 1
                 if self.empty_minutes_counter >= 10:
-                    print("💤 Automated idle shutdown sequence triggered.")
                     await asyncio.to_thread(api_client.call_palworld_api, "save")
                     await asyncio.to_thread(api_client.call_palworld_api, "shutdown", payload={"waittime": 5, "message": "Inactivity shutdown"})
                     self.empty_minutes_counter = 0
+                    await self.bot.send("💤 Automated idle shutdown sequence triggered.")
                     await self.bot.change_presence(status=discord.Status.idle, activity=None)
         except Exception:
             pass
