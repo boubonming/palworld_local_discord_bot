@@ -58,20 +58,13 @@ class ServerControl(commands.Cog):
             await ctx.send("🤖 System check: The Palworld server process is already running on the host PC!")
             return
 
-        await ctx.send("🚀 Verification clear! Waking up the Palworld Dedicated Server...")
         try:
             import subprocess
-            cmd = (
-                f'powershell -WindowStyle Hidden -Command '
-                f'"Start-Process \'{SERVER_EXE_PATH}\' -ArgumentList \'-publiclobby\' '
-                f'-WorkingDirectory \'{SERVER_DIR}\' -WindowStyle Hidden"'
+            subprocess.Popen(
+                [SERVER_EXE_PATH, "-publiclobby"],
+                cwd=SERVER_DIR,
+                creationflags=subprocess.CREATE_NO_WINDOW
             )
-            subprocess.Popen(cmd, shell=True)
-            # subprocess.Popen(
-            #     [SERVER_EXE_PATH, "-publiclobby"],
-            #     cwd=SERVER_DIR,
-            #     creationflags=subprocess.CREATE_NO_WINDOW
-            # )
             await self.bot.change_presence(status=discord.Status.online, activity=discord.Game(name="Palworld Server (ONLINE)"))
             self.auto_shutdown_check.start()
             await ctx.send("✅ Game server console spawned successfully!")
